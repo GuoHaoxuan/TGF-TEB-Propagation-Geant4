@@ -41,7 +41,7 @@
 // 15.05.2007 V.Ivanchenko rename to _option1
 // 21.04.2008 V.Ivanchenko add long-lived D and B mesons
 // 19.11.2010 V.Ivanchenko added WentzelVI model for muons;
-//                         disable ApplyCut option for compatibility with 9.2 
+//                         disable ApplyCut option for compatibility with 9.2
 //
 //----------------------------------------------------------------------------
 //
@@ -82,7 +82,6 @@
 
 #include "G4hIonisation.hh"
 #include "G4ionIonisation.hh"
-#include "G4alphaIonisation.hh"
 
 #include "G4ParticleTable.hh"
 #include "G4Gamma.hh"

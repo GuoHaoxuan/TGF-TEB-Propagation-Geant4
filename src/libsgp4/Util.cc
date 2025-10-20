@@ -25,7 +25,7 @@ namespace Util
 {
     namespace
     {
-        struct IsDigit: std::unary_function<char, bool>
+        struct IsDigit: std::__unary_function<char, bool>
         {
             bool operator()(char c) const
             {

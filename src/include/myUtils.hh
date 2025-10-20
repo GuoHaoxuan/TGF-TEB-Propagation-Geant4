@@ -10,13 +10,15 @@
 #include "Settings.hh"
 #include "Randomize.hh"
 #include "sys/types.h"
-#include "sys/sysinfo.h"
+#if defined(__linux__)
+#include <sys/sysinfo.h>
+#endif
 #include "stdlib.h"
 #include "stdio.h"
 #include "string.h"
 #include <uuid/uuid.h>
 #include <sys/stat.h>
-#include <unistd.h>
+// #include <unistd.h>
 #include <G4ThreeVector.hh>
 #include <mutex>
 #include <unordered_set>

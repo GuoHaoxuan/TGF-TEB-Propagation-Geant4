@@ -24,15 +24,22 @@ find_package(PkgConfig REQUIRED)
 find_package(Threads REQUIRED)
 pkg_search_module(UUID REQUIRED uuid)
 
+# If Geant4 provides a use file make sure to include it (older Geant4 versions)
+if(Geant4_FOUND)
+  if(DEFINED Geant4_USE_FILE)
+    include(${Geant4_USE_FILE})
+  endif()
+else()
+  message(FATAL_ERROR "Geant4 not found. Please set Geant4_DIR or install Geant4.")
+endif()
+
 #----------------------------------------------------------------------------
 # Include directories
 include_directories(
-    ${PROJECT_SOURCE_DIR}/src/libsgp4 
+    ${PROJECT_SOURCE_DIR}/src/libsgp4
     ${PROJECT_SOURCE_DIR}/src/src/C/UUID/
-    ${PROJECT_SOURCE_DIR}/src 
-    ${PROJECT_SOURCE_DIR}/src/include 
-    ${Geant4_INCLUDE_DIR}/src
-    ${Geant4_INCLUDE_DIR}/src/src
+    ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/src/include
     ${PROJECT_SOURCE_DIR}/src/src/C/WMM/src/
     ${PROJECT_SOURCE_DIR}/src/src/C/MSIS/
 )
@@ -59,8 +66,8 @@ add_executable(TGF_Propa ${SOURCES})
 # Link libraries
 target_link_libraries(TGF_Propa PUBLIC ${Geant4_LIBRARIES} ${UUID_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-# Include and link directories
-target_include_directories(TGF_Propa PUBLIC ${UUID_INCLUDE_DIRS})
+# Ensure Geant4 include dirs are added to the target as well
+target_include_directories(TGF_Propa PUBLIC ${UUID_INCLUDE_DIRS} ${Geant4_INCLUDE_DIRS})
 
 #----------------------------------------------------------------------------
 # Add custom target
